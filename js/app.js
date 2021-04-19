@@ -1,3 +1,80 @@
+var logo = document.getElementById("logo");
+var homepage_overlay = document.getElementById("homepage-overlay");
+var home_sliders = document.querySelectorAll("#home .slide-in");
+var home_faders = document.querySelectorAll("#home  .fade-in");
+
+var about_title = document.querySelector(".title .slide-in");
+var about_desc = document.querySelector(".content .slide-in");
+
+var images,
+    loadedImage = 0;
+
+function preloadImages() {
+    images = [
+        "img/JGLogo.png",
+        "img/joe-crossarm.png"
+    ];
+
+    for (var i = 0; i < images.length; i++) {
+        var imageObj = new Image();
+        imageObj.src = images[i];
+        imageObj.addEventListener("load", iLoad, false)
+    }
+}
+
+function iLoad() {
+    loadedImage++;
+    if (images.length == loadedImage) {
+        
+      logo.src = images[0];
+
+      homepage_overlay.style.background = 'linear-gradient(rgba(255, 182, 51, .65),rgba(255, 182, 51, .65)), url("' + images[1] + '")';
+      homepage_overlay.style.backgroundRepeat = 'no-repeat';
+      homepage_overlay.style.backgroundSize = '115% 103%';
+      homepage_overlay.style.backgroundPosition = 'left';
+
+    }
+
+    home_sliders.forEach( slider => {
+      setTimeout(function(){ slider.classList.add('appear'); }, 1500);
+    })
+
+    home_faders.forEach( fader => {
+      fader.classList.add('appear');
+    })
+    
+}
+
+var appearOptions = {
+  threshold: 0,
+  rootMargin: "0px 0px -200px 0px"
+};
+
+var appearOnScroll = new IntersectionObserver (function (
+  entries,
+  appearOnScroll
+) {
+    entries.forEach(entry => {
+        if(!entry.isIntersecting) {
+          return;
+        } else {
+          entry.target.classList.add('appear');
+          appearOnScroll.unobserve(entry.target);
+        }
+    });
+}, appearOptions);
+
+
+window.addEventListener('scroll', function() {
+  var value = window.scrollY;
+
+  about_title.style.left = -value * 1 + 'px';
+  about_desc.style.right = -value * 0.76 + 'px';
+
+})
+
+
+preloadImages();
 // for particle.js
 particlesJS('particles-js',
   
@@ -119,5 +196,3 @@ particlesJS('particles-js',
   }
 
 );
-
-console.log("Hi");

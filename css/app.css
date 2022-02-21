@@ -23,6 +23,10 @@
   cursor: default;
 }
 
+a {
+  cursor: pointer;
+}
+
 body {
   -ms-overflow-style: none;
   /* Hide scrollbar for IE, Edge and Firefox */

@@ -11,7 +11,7 @@ var images,
 
 function preloadImages() {
     images = [
-        "img/JGLogo.png",
+        "img/JGLogo.svg",
         "img/joe-crossarm.png"
     ];
 
@@ -43,6 +43,16 @@ function iLoad() {
       fader.classList.add('appear');
     })
     
+}
+
+function downloadCV() {
+  var cvLink ='https://drive.google.com/uc?export=download&id=1XRaLoa8Q_KjYjZOh07rY3_Q34R6bYtry';
+  window.open( cvLink, '_blank');
+}
+
+function contactMe() {
+  var email="joemargatchalian@yahoo.com";
+  window.location.href = `mailto:${email}`;
 }
 
 var appearOptions = {
